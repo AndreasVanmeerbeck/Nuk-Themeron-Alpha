@@ -24,7 +24,7 @@ let keyS;
 let keyD;
 let keyZ;
 let keySPACE;
+let keySHIFT;
 let JumpCount;
 let NextJump;
 let Timer;
-let keySHIFT;

@@ -50,26 +50,9 @@ class scene extends Phaser.Scene {
 
     update() {
 
+        this.player.move();
 
-            if ((keySPACE.isDown || keyZ.isDown) && JumpCount < 1 && NextJump<Timer){
-                this.player.jumpHuman()
-                console.log("oui")
-            }
 
-            switch (true) {
-            case keyQ.isDown:
-                this.player.moveLeftHuman()
-                break;
-            case keyD.isDown:
-                this.player.moveRightHuman();
-                break;
-            default:
-                this.player.stopHuman();
-            }
-
-        if (this.player.player.body.onFloor()){
-            JumpCount = 0;
-        }
 
         Timer++
         if (Timer>500){

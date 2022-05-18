@@ -3,11 +3,14 @@ class Player {
 
     constructor(scene) {
         this.scene=scene
+
         this.cameras=scene
+
         this.player = this.scene.physics.add.sprite(50, 300, 'player');
         this.player.setBounce(0);
         this.player.setCollideWorldBounds(false);
         this.scene.physics.add.collider(this.player, this.scene.platforms);
+        this.player.chat = false;
 
         this.scene.anims.create({
             key: 'walkh',
@@ -58,6 +61,68 @@ class Player {
         if (this.player.body.onFloor()) {
             this.player.play('idleh',true)
         }
+    }
+
+    move(){
+        if ((keySPACE.isDown || keyZ.isDown) && JumpCount < 1 && NextJump<Timer){
+            this.jumpHuman()
+        }
+
+        switch (true) {
+            case keyQ.isDown:
+                this.moveLeftHuman()
+                break;
+            case keyD.isDown:
+                this.moveRightHuman();
+                break;
+            case keySHIFT.isDown:
+                if (!this.flag) {
+
+                } else {
+                    console.log("oui")
+                    this.transform()
+                    this.flag = false
+                }
+                break;
+            case this.player.body.onFloor():
+                this.stopHuman();
+                break;
+        }
+
+                if(!keySHIFT.isDown)
+                {
+                    this.flag=true
+                }
+
+
+        if (this.player.body.onFloor()){
+            JumpCount = 0;
+        }
+    }
+
+    transform() {
+        if (!this.player.chat)
+        {
+            this.player.visible=false;
+            this.player.setBounce(1.8, 2);
+            this.player.body.setSize(150,150);
+            this.player.body.setMaxVelocityY(860);
+            this.player.body.setMaxVelocityX(600);
+            this.player.setCollideWorldBounds(false);
+            this.player.body.position.y = this.player.body.position.y - 30;
+            this.player.chat = true;
+
+        }
+        else
+        {
+            this.player.setTexture('player');
+            this.player.visible=true;
+            this.player.setBounce(0, 0);
+            this.player.body.setSize(80, 130);
+            this.player.setCollideWorldBounds(false);
+            this.player.chat = !this.player.chat;
+        }
+
     }
 
     }
