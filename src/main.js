@@ -10,7 +10,7 @@ const config = {
     physics: {
         default: 'arcade',
         arcade: {
-            gravity: { y: 500 },
+            gravity: { y: 1600 },
             debug: true,
         },
     },
@@ -28,3 +28,4 @@ let keySHIFT;
 let JumpCount;
 let NextJump;
 let Timer;
+let CatTimer = 200;

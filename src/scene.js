@@ -4,12 +4,13 @@ class scene extends Phaser.Scene {
     preload() {
         this.load.image('background', 'assets/images/background.png');
         this.load.image('spike', 'assets/images/spike.png');
+        this.load.image('player', 'assets/images/Bastet.png');
         // At last image must be loaded with its JSON
-        this.load.atlas('player', 'assets/images/kenney_player.png', 'assets/images/kenney_player_atlas.json');
-        this.load.image('tiles', 'assets/tilesets/platformPack_tilesheet.png');
+        //this.load.atlas('player', 'assets/images/kenney_player.png', 'assets/images/kenney_player_atlas.json');
+        this.load.image('tiles', 'assets/tilesets/BLOC.png');
 
         // Load the export Tiled JSON
-        this.load.tilemapTiledJSON('map', 'assets/tilemaps/Alpha1.json');
+        this.load.tilemapTiledJSON('map', 'assets/tilemaps/level1.json');
     }
 
 
@@ -18,14 +19,17 @@ class scene extends Phaser.Scene {
 
 
 
-        const backgroundImage = this.add.image(0, 0, 'background').setOrigin(0, 0);
-        backgroundImage.setScale(1, 0.8);
+        const backgroundImage = this.add.image(0, -120, 'background').setOrigin(0, 0);
+        backgroundImage.setScale(1, 1);
         const map = this.make.tilemap({key: 'map'});
 
-        const tileset = map.addTilesetImage('Alpha_test1', 'tiles');
-        this.platforms = map.createStaticLayer('Sol', tileset);
+        const tileset = map.addTilesetImage('main_tileset', 'tiles');
 
-        this.platforms.setCollisionByExclusion(-1, true);
+        this.blocks = map.createStaticLayer('Ground', tileset);
+        //this.blocks.setCollisionByExclusion(-1, true);
+
+
+
         //Controles
         keyQ = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.Q);
         keyS = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.S);
@@ -39,27 +43,39 @@ class scene extends Phaser.Scene {
         //Variables
         JumpCount = 0;
         Timer = 0;
-        NextJump = Timer + 10
+        NextJump = Timer + 25
 
 
         this.player = new Player(this)
 
-        this.cameras.main.startFollow(this.player.player,false);
+        this.collide = this.physics.add.group({
+            allowGravity: false,
+            immovable: true,
+        });
+        map.getObjectLayer('Collider').objects.forEach((col) => {
+            this.collideSprite = this.collide.create(col.x, col.y, col.height).setOrigin(0).setDisplaySize(col.width,col.height).visible=false;
+            this.physics.add.collider(this.collide, this.collideSprite)
+        });
+
+        this.physics.add.collider(this.collide, this.player.player);
+
+        //this.cameras.main.startFollow(this.player.player,false);
     }
 
 
     update() {
 
         this.player.move();
-
-
-
+        this.player.timertransform();
         Timer++
         if (Timer>500){
             Timer = 0
         }
+        if (CatTimer>1000){
+            CatTimer=1000
+        }
 
-
+        console.log(CatTimer)
 
 
 
