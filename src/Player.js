@@ -125,7 +125,7 @@ class Player {
             this.player.body.setMaxVelocityY(700);
             this.player.body.setMaxVelocityX(1300);
             this.player.setCollideWorldBounds(false);
-            this.player.body.position.y = this.player.body.position.y - 55;
+            this.player.body.position.y = this.player.body.position.y - 70;
             this.player.chat = !this.player.chat;
         }
 
