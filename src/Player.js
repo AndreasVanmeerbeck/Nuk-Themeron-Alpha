@@ -139,15 +139,7 @@ class Player {
             CatTimer--
         }
         if (CatTimer == 0){
-            this.player.setTexture('player');
-            this.player.visible=true;
-            this.player.setBounce(0, 0);
-            this.player.body.setSize(100, 190);
-            this.player.body.setMaxVelocityY(700);
-            this.player.body.setMaxVelocityX(1300);
-            this.player.setCollideWorldBounds(false);
-            this.player.body.position.y = this.player.body.position.y - 55;
-            this.player.chat = !this.player.chat;
+            this.transform()
         }
     }
 

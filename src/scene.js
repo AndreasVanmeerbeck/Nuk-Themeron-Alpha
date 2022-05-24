@@ -1,5 +1,8 @@
 class scene extends Phaser.Scene {
 
+    constructor (){
+        super("playGame")
+    }
 
     preload() {
         this.load.image('background', 'assets/images/background.png');
@@ -60,6 +63,7 @@ class scene extends Phaser.Scene {
         this.physics.add.collider(this.collide, this.player.player);
 
         //this.cameras.main.startFollow(this.player.player,false);
+        this.cameras.main.setBounds(0, 0, 35840, 1152);
     }
 
 
@@ -67,6 +71,7 @@ class scene extends Phaser.Scene {
 
         this.player.move();
         this.player.timertransform();
+
         Timer++
         if (Timer>500){
             Timer = 0
@@ -74,7 +79,9 @@ class scene extends Phaser.Scene {
         if (CatTimer>1000){
             CatTimer=1000
         }
+        if (ManaEmpty = true){
 
+        }
         console.log(CatTimer)
 
 
