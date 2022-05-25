@@ -28,7 +28,7 @@ class scene extends Phaser.Scene {
 
         const tileset = map.addTilesetImage('main_tileset', 'tiles');
 
-        this.blocks = map.createStaticLayer('Ground', tileset);
+        this.blocks = map.createLayer('Ground', tileset);
         //this.blocks.setCollisionByExclusion(-1, true);
 
 
@@ -63,7 +63,7 @@ class scene extends Phaser.Scene {
         this.physics.add.collider(this.collide, this.player.player);
 
         //this.cameras.main.startFollow(this.player.player,false);
-        this.cameras.main.setBounds(0, 0, 35840, 1152);
+        //this.cameras.main.setBounds(0, 0, 35840, 1152);
     }
 
 
@@ -79,10 +79,6 @@ class scene extends Phaser.Scene {
         if (CatTimer>1000){
             CatTimer=1000
         }
-        if (ManaEmpty = true){
-
-        }
-        console.log(CatTimer)
 
 
 

@@ -20,7 +20,6 @@ class Player {
         JumpCount++
         Timer = 0
         this.player.setVelocityY(-800);
-        this.player.play('jumph');
 
     }
     jumpCat(){
@@ -75,7 +74,7 @@ class Player {
 
         switch (true) {
             case keyQ.isDown:
-                if (this.player.chat != true){
+                if (!this.player.chat){
                 this.moveLeftHuman()
                 }
                 else {
@@ -83,7 +82,7 @@ class Player {
                 }
                 break;
             case keyD.isDown:
-                if (this.player.chat != true){
+                if (!this.player.chat){
                     this.moveRightHuman()
                 }
                 else {
@@ -138,7 +137,7 @@ class Player {
         if (this.player.chat && CatTimer>=1){
             CatTimer--
         }
-        if (CatTimer == 0){
+        if (CatTimer <= 0){
             this.transform()
         }
     }
