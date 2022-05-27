@@ -6,6 +6,7 @@ class scene extends Phaser.Scene {
 
     preload() {
         this.load.image('background', 'assets/images/background.png');
+
         this.load.image('spike', 'assets/images/spike.png');
         this.load.image('player', 'assets/images/Bastet.png');
         // At last image must be loaded with its JSON
@@ -19,17 +20,19 @@ class scene extends Phaser.Scene {
 
     create() {
 
+        this.scene.launch("UIScene")
 
-
-
-        const backgroundImage = this.add.image(0, -120, 'background').setOrigin(0, 0);
+        //Background
+        const backgroundImage = this.add.image(0, 0, 'background').setOrigin(0, 0);
         backgroundImage.setScale(1, 1);
+
         const map = this.make.tilemap({key: 'map'});
 
         const tileset = map.addTilesetImage('main_tileset', 'tiles');
 
         this.blocks = map.createStaticLayer('Ground', tileset);
         //this.blocks.setCollisionByExclusion(-1, true);
+
 
 
 
@@ -63,7 +66,8 @@ class scene extends Phaser.Scene {
         this.physics.add.collider(this.collide, this.player.player);
 
         //this.cameras.main.startFollow(this.player.player,false);
-        this.cameras.main.setBounds(0, 0, 35840, 1152);
+        this.cameras.main.setBounds(45, -2, 15000, 15000)
+        this.cameras.main.zoom = 0.7
     }
 
 

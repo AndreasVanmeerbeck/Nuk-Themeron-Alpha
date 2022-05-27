@@ -14,10 +14,10 @@ class SceneMenu extends Phaser.Scene {
     }
 
     create() {
-        this.add.image(855,350,'icon').setOrigin(0,0).setScale(1);
-        this.add.image(500,150,'title').setOrigin(0,0).setScale(1);
+        this.add.image(550,250,'icon').setOrigin(0,0).setScale(1);
+        this.add.image(120,75,'title').setOrigin(0,0).setScale(1);
 
-        let playbutton = this.add.image(940,700,'play');
+        let playbutton = this.add.image(630,525,'play');
         playbutton.setScale(1);
 
         playbutton.setInteractive();
