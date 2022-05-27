@@ -19,7 +19,7 @@ const config = {
         default: 'arcade',
         arcade: {
             gravity: { y: 1600 },
-            debug: true,
+            debug: true,fps:140
         },
     },
     scene: [SceneMenu,scene,SceneUI]
