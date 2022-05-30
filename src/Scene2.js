@@ -70,9 +70,19 @@ class Scene2 extends Phaser.Scene {
         //this.cameras.main.setBounds(0, 0, 35840, 1152);
     }
 
+    mapSwitch(){
+        if(this.player.player.x <= 50){
+            console.log("fdp")
+            this.scene.stop("Screen2")
+            this.scene.launch("playGame")
+            MapSwitchDroite = true
+        }
+    }
+
 
     update() {
 
+        this.mapSwitch();
         this.player.move();
         this.player.timertransform();
 

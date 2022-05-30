@@ -14,6 +14,12 @@ class Player {
         this.scene.physics.add.collider(this.player, this.scene.blocks);
         this.player.chat = false;
 
+        if(MapSwitchDroite){
+            this.player.setX(1845);
+            this.player.setY(865);
+            MapSwitchDroite = false
+        }
+
     }
 
 

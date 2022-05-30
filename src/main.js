@@ -27,6 +27,7 @@ const config = {
         scene,
         Scene2,
         SceneUI,
+        SceneControls,
     ]
 };
 
@@ -42,3 +43,4 @@ let JumpCount;
 let NextJump;
 let Timer;
 let CatTimer = 200;
+let MapSwitchDroite;

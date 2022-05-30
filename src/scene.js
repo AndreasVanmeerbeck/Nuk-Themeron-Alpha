@@ -7,10 +7,7 @@ class scene extends Phaser.Scene {
     preload() {
         this.load.image('background', 'assets/images/background.png');
 
-        this.load.image('spike', 'assets/images/spike.png');
         this.load.image('player', 'assets/images/Bastet.png');
-        // At last image must be loaded with its JSON
-        //this.load.atlas('player', 'assets/images/kenney_player.png', 'assets/images/kenney_player_atlas.json');
         this.load.image('tiles', 'assets/tilesets/BLOC.png');
 
         // Load the export Tiled JSON
@@ -59,14 +56,6 @@ class scene extends Phaser.Scene {
         });
         this.physics.add.collider(this.collide, this.player.player);
 
-        /*this.switch = this.physics.add.group({
-            allowGravity: false,
-            immovable: true,
-        });
-        map.getObjectLayer('SwitchMap').objects.forEach((swi) => {
-             const switchSprite = this.switch.create(swi.x, swi.y, swi.height).setOrigin(0).setDisplaySize(swi.width,swi.height).visible=false;
-        });*/
-
 
 
 
@@ -79,14 +68,26 @@ class scene extends Phaser.Scene {
         //this.cameras.main.setBounds(0, 0, 35840, 1152);
     }
 
+    mapSwitch(){
+        if(this.player.player.x >= 1850){
+            this.scene.stop("playGame")
+            this.scene.launch("Screen2")
+            this.player.player.setX(110);
+            this.player.player.setY(865);
+        }
+    }
 
     update() {
+
+
 
         if(keyS.isDown){
             this.scene.stop("playGame")
             this.scene.launch("Screen2")
         }
 
+
+        this.mapSwitch();
         this.player.move();
         this.player.timertransform();
 
