@@ -22,7 +22,12 @@ const config = {
             debug: true,fps:140
         },
     },
-    scene: [SceneMenu,scene,SceneUI]
+    scene: [
+        SceneMenu,
+        scene,
+        Scene2,
+        SceneUI,
+    ]
 };
 
 const game = new Phaser.Game(config);
@@ -37,4 +42,3 @@ let JumpCount;
 let NextJump;
 let Timer;
 let CatTimer = 200;
-let ManaEmpty = false;

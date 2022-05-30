@@ -16,6 +16,8 @@ class Player {
 
     }
 
+
+
     jumpHuman(){
         JumpCount++
         Timer = 0

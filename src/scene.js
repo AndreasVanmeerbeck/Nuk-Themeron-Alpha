@@ -33,9 +33,6 @@ class scene extends Phaser.Scene {
         this.blocks = map.createLayer('Ground', tileset);
         //this.blocks.setCollisionByExclusion(-1, true);
 
-
-
-
         //Controles
         keyQ = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.Q);
         keyS = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.S);
@@ -44,12 +41,10 @@ class scene extends Phaser.Scene {
         keySPACE = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
         keySHIFT = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SHIFT);
 
-
-
         //Variables
         JumpCount = 0;
         Timer = 0;
-        NextJump = Timer + 25
+        NextJump = Timer + 18
 
 
         this.player = new Player(this)
@@ -62,8 +57,20 @@ class scene extends Phaser.Scene {
             this.collideSprite = this.collide.create(col.x, col.y, col.height).setOrigin(0).setDisplaySize(col.width,col.height).visible=false;
             this.physics.add.collider(this.collide, this.collideSprite)
         });
-
         this.physics.add.collider(this.collide, this.player.player);
+
+        /*this.switch = this.physics.add.group({
+            allowGravity: false,
+            immovable: true,
+        });
+        map.getObjectLayer('SwitchMap').objects.forEach((swi) => {
+             const switchSprite = this.switch.create(swi.x, swi.y, swi.height).setOrigin(0).setDisplaySize(swi.width,swi.height).visible=false;
+        });*/
+
+
+
+
+
 
         //this.cameras.main.startFollow(this.player.player,false);
 
@@ -75,6 +82,11 @@ class scene extends Phaser.Scene {
 
     update() {
 
+        if(keyS.isDown){
+            this.scene.stop("playGame")
+            this.scene.launch("Screen2")
+        }
+
         this.player.move();
         this.player.timertransform();
 
@@ -85,10 +97,6 @@ class scene extends Phaser.Scene {
         if (CatTimer>1000){
             CatTimer=1000
         }
-
-
-
-
 
     }
 }
