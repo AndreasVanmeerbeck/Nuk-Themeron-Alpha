@@ -7,9 +7,10 @@ class scene extends Phaser.Scene {
     preload() {
         this.load.image('background', 'assets/images/background.png');
 
-        this.load.spritesheet('idle','assets/images/animation/Anim_Idle_sheet.png',{frameWidth: 98, frameHeight: 205});
+        this.load.spritesheet('idle','assets/images/animation/Anim_Idle_sheet.png',{frameWidth: 98, frameHeight: 190});
 
         this.load.image('player', 'assets/images/Bastet.png');
+        this.load.image('vase', 'assets/images/vase.png');
         this.load.image('tiles', 'assets/tilesets/BLOC.png');
 
         // Load the export Tiled JSON
@@ -25,6 +26,8 @@ class scene extends Phaser.Scene {
         const backgroundImage = this.add.image(0, 0, 'background').setOrigin(0, 0);
         backgroundImage.setScale(1, 1);
 
+        const vases = this.add.image(1400, 255, 'vase').setOrigin(0, 0);
+
         const map = this.make.tilemap({key: 'map'});
 
         const tileset = map.addTilesetImage('main_tileset', 'tiles');
@@ -32,6 +35,8 @@ class scene extends Phaser.Scene {
         this.blocks = map.createLayer('Ground', tileset);
 
         this.spikes = map.createLayer('Spike', tileset);
+
+        this.lamps = map.createLayer('Lamp', tileset);
         //this.blocks.setCollisionByExclusion(-1, true);
 
         //Controles
@@ -68,21 +73,21 @@ class scene extends Phaser.Scene {
             this.SpikeColSprite = this.spikescollide.create(spike.x, spike.y, spike.height).setOrigin(0).setDisplaySize(spike.width,spike.height).visible=false;
             this.physics.add.collider(this.spikescollide, this.SpikeColSprite)
         });
+        this.spikeCollider()
+
+
+        this.cameras.main.setBounds(45, -2, 15000, 15000)
+        this.cameras.main.zoom = 0.7
+    }
+
+    spikeCollider(){
         this.physics.add.collider(this.spikescollide, this.player.player, (player) => {
             console.log("collide")
             this.player.player.setVelocityX(0);
             this.player.player.setVelocityY(0);
-            this.player.player.setX(110);
+            this.player.player.setX(160);
             this.player.player.setY(850);
-        })
-
-
-
-        //this.cameras.main.startFollow(this.player.player,false);
-
-        this.cameras.main.setBounds(45, -2, 15000, 15000)
-        this.cameras.main.zoom = 0.7
-        //this.cameras.main.setBounds(0, 0, 35840, 1152);
+        });
     }
 
     mapSwitch(){
@@ -94,9 +99,10 @@ class scene extends Phaser.Scene {
         }
     }
 
-    death(player) {
-        this.player.player.setX(110);
-        this.player.player.setY(865);
+    BonusTake(player, bonus){
+        bonus.destroy()
+        BonusAmount ++
+        console.log(BonusAmount)
     }
 
 

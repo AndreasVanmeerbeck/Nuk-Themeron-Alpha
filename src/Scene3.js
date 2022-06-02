@@ -1,7 +1,7 @@
-class Scene2 extends Phaser.Scene {
+class Scene3 extends Phaser.Scene {
 
     constructor (){
-        super({ key: 'Screen2'});
+        super({ key: 'Screen3'});
     }
 
     preload() {
@@ -21,10 +21,9 @@ class Scene2 extends Phaser.Scene {
 
         const tileset = map.addTilesetImage('main_tileset', 'tiles');
 
-        this.blocks = map.createLayer('Ground2', tileset);
+        this.blocks = map.createLayer('Ground3', tileset);
 
-        this.spikes = map.createLayer('Spike2', tileset);
-        //this.blocks.setCollisionByExclusion(-1, true);
+        this.spikes = map.createLayer('Spike3', tileset);
 
         //Controles
         keyQ = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.Q);
@@ -46,7 +45,7 @@ class Scene2 extends Phaser.Scene {
             allowGravity: false,
             immovable: true,
         });
-        map.getObjectLayer('Collider2').objects.forEach((col) => {
+        map.getObjectLayer('Collider3').objects.forEach((col) => {
             this.collideSprite = this.collide.create(col.x, col.y, col.height).setOrigin(0).setDisplaySize(col.width,col.height).visible=false;
             this.physics.add.collider(this.collide, this.collideSprite)
         });
@@ -56,34 +55,12 @@ class Scene2 extends Phaser.Scene {
             allowGravity: false,
             immovable: true,
         });
-        map.getObjectLayer('SpikeCol2').objects.forEach((spike) => {
+        map.getObjectLayer('SpikeCol3').objects.forEach((spike) => {
             this.SpikeColSprite = this.spikescollide.create(spike.x, spike.y, spike.height).setOrigin(0).setDisplaySize(spike.width,spike.height).visible=false;
             this.physics.add.collider(this.spikescollide, this.SpikeColSprite)
         });
 
         this.spikeCollider()
-
-        this.Bbonus = this.physics.add.group({
-            allowGravity: false,
-            immovable: true
-        });
-
-        map.getObjectLayer('Bbonus2').objects.forEach((bon) => {
-            let bonus = this.physics.add.sprite(bon.x, bon.y, 'icon');
-            bonus.body.setAllowGravity(false)
-            bonus.setImmovable(true);
-            bonus.setVisible(true);
-            bonus.setScale(0.4 );
-            this.Bbonus.add(bonus)
-        });
-
-        this.physics.add.overlap(this.Bbonus, this.player.player, this.BonusTake, null, this)
-
-
-
-
-
-
 
         this.cameras.main.setBounds(45, -2, 15000, 15000)
         this.cameras.main.zoom = 0.7
@@ -105,29 +82,11 @@ class Scene2 extends Phaser.Scene {
         });
     }
 
-    mapSwitchDroite(){
-        if(this.player.player.x <= 50){
-            console.log("fdp")
-            this.scene.stop("Screen2")
-            this.scene.launch("playGame")
-            MapSwitchDroite = true
-        }
-    }
 
-    mapSwitchBas(){
-        if(this.player.player.y >= 1080){
-            console.log("fdp")
-            this.scene.stop("Screen2")
-            this.scene.launch("Screen3")
-            MapSwitchHaut = true
-        }
-    }
+
 
 
     update() {
-
-        this.mapSwitchBas();
-        this.mapSwitchDroite();
 
         this.player.move();
         this.player.timertransform();

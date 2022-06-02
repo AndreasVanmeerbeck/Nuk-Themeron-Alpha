@@ -7,18 +7,19 @@ class Player {
 
         this.player = this.scene.physics.add.sprite(110, 865, 'player');
         this.player.setBounce(0);
-        this.player.body.setSize(100, 190);
+        this.player.body.setSize(70, 180);
         this.player.body.setMaxVelocityY(700);
         this.player.body.setMaxVelocityX(1300);
         this.player.setCollideWorldBounds(false);
         this.scene.physics.add.collider(this.player, this.scene.blocks);
         this.player.chat = false;
 
-        if(MapSwitchDroite){
-            this.player.setX(1845);
-            this.player.setY(865);
-            MapSwitchDroite = false
+        if(MapSwitchHaut){
+            this.player.setX(950);
+            this.player.setY(10);
+            MapSwitchHaut = false
         }
+
 
         this.animation();
     }
@@ -28,9 +29,9 @@ class Player {
             key: 'idleplayer',
             frames: this.scene.anims.generateFrameNumbers('idle', {
                 start: 0,
-                end: 3,
+                end: 2,
             }),
-            frameRate: 4,
+            frameRate: 2,
             repeat: 0,
         });
     }
@@ -38,30 +39,36 @@ class Player {
     jumpHuman(){
         JumpCount++
         Timer = 0
-        this.player.setVelocityY(-800);
+        this.player.setVelocityY(-700)
+        this.player.stop('idleplayer', true)
 
     }
     jumpCat(){
         JumpCount++
         Timer = 0
-        this.player.setVelocityY(-600);
+        this.player.setVelocityY(-550);
+        this.player.stop('idleplayer', true)
 
     }
     moveRightHuman(){
         this.player.setVelocityX(350);
         this.player.setFlipX(false);
+        this.player.stop('idleplayer', true)
     }
     moveRightCat(){
         this.player.setVelocityX(600);
         this.player.setFlipX(true);
+        this.player.stop('idleplayer', true)
     }
     moveLeftHuman(){
         this.player.setVelocityX(-350);
         this.player.setFlipX(true);
+        this.player.stop('idleplayer', true)
     }
     moveLeftCat(){
         this.player.setVelocityX(-600);
         this.player.setFlipX(true);
+        this.player.stop('idleplayer', true)
     }
     stopHuman(){
         this.player.setVelocityX(0);
@@ -88,7 +95,7 @@ class Player {
 
         }
 
-        if (!keyQ.isDown || keyD.isDown){
+        if (!keyQ.isDown || !keyD.isDown){
             this.stopHuman()
         }
 
@@ -129,9 +136,9 @@ class Player {
             this.player.setBounce(0,0);
             this.player.body.setSize(110,50);
             this.player.body.setMaxVelocityY(700);
-            this.player.body.setMaxVelocityX(1300);
+            this.player.body.setMaxVelocityX(900);
             this.player.setCollideWorldBounds(false);
-            this.player.body.position.y = this.player.body.position.y + 70;
+            this.player.body.position.y = this.player.body.position.y + 60;
             this.player.chat = true;
             CatTimer - 50
         }
@@ -140,11 +147,11 @@ class Player {
             this.player.setTexture('player');
             this.player.visible=true;
             this.player.setBounce(0, 0);
-            this.player.body.setSize(100, 190);
+            this.player.body.setSize(70, 180);
             this.player.body.setMaxVelocityY(700);
             this.player.body.setMaxVelocityX(1300);
             this.player.setCollideWorldBounds(false);
-            this.player.body.position.y = this.player.body.position.y - 70;
+            this.player.body.position.y = this.player.body.position.y - 80;
             this.player.chat = !this.player.chat;
         }
 
