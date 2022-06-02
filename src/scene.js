@@ -7,6 +7,8 @@ class scene extends Phaser.Scene {
     preload() {
         this.load.image('background', 'assets/images/background.png');
 
+        this.load.spritesheet('idle','assets/images/animation/Anim_Idle_sheet.png',{frameWidth: 98, frameHeight: 205});
+
         this.load.image('player', 'assets/images/Bastet.png');
         this.load.image('tiles', 'assets/tilesets/BLOC.png');
 
@@ -28,6 +30,8 @@ class scene extends Phaser.Scene {
         const tileset = map.addTilesetImage('main_tileset', 'tiles');
 
         this.blocks = map.createLayer('Ground', tileset);
+
+        this.spikes = map.createLayer('Spike', tileset);
         //this.blocks.setCollisionByExclusion(-1, true);
 
         //Controles
@@ -56,8 +60,21 @@ class scene extends Phaser.Scene {
         });
         this.physics.add.collider(this.collide, this.player.player);
 
-
-
+        this.spikescollide = this.physics.add.group({
+            allowGravity: false,
+            immovable: true,
+        });
+        map.getObjectLayer('SpikeCol').objects.forEach((spike) => {
+            this.SpikeColSprite = this.spikescollide.create(spike.x, spike.y, spike.height).setOrigin(0).setDisplaySize(spike.width,spike.height).visible=false;
+            this.physics.add.collider(this.spikescollide, this.SpikeColSprite)
+        });
+        this.physics.add.collider(this.spikescollide, this.player.player, (player) => {
+            console.log("collide")
+            this.player.player.setVelocityX(0);
+            this.player.player.setVelocityY(0);
+            this.player.player.setX(110);
+            this.player.player.setY(850);
+        })
 
 
 
@@ -76,6 +93,12 @@ class scene extends Phaser.Scene {
             this.player.player.setY(865);
         }
     }
+
+    death(player) {
+        this.player.player.setX(110);
+        this.player.player.setY(865);
+    }
+
 
     update() {
 

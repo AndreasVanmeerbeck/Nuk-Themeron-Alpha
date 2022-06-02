@@ -20,9 +20,20 @@ class Player {
             MapSwitchDroite = false
         }
 
+        this.animation();
     }
 
-
+    animation() {
+        this.scene.anims.create({
+            key: 'idleplayer',
+            frames: this.scene.anims.generateFrameNumbers('idle', {
+                start: 0,
+                end: 3,
+            }),
+            frameRate: 4,
+            repeat: 0,
+        });
+    }
 
     jumpHuman(){
         JumpCount++
@@ -54,6 +65,7 @@ class Player {
     }
     stopHuman(){
         this.player.setVelocityX(0);
+        this.player.play('idleplayer', true)
     }
 
     move(){

@@ -6,10 +6,16 @@ const config = {
     scale: {
         mode: Phaser.Scale.RESIZE,
         autoCenter: Phaser.Scale.CENTER_BOTH,
+        fps:{
+            min:120,
+            target:140,
+            forceSetTimeOut:true,
+        },
         min: {
             width: 720,
             height: 680
         },
+
         max: {
             width: 1280,
             height: 720,
@@ -19,7 +25,7 @@ const config = {
         default: 'arcade',
         arcade: {
             gravity: { y: 1600 },
-            debug: true,fps:140
+            debug: true
         },
     },
     scene: [
