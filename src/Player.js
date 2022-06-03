@@ -31,16 +31,6 @@ class Player {
     animation() {
 
         this.scene.anims.create({
-            key: 'walkplayer',
-            frames: this.scene.anims.generateFrameNumbers('walk', {
-                start: 0,
-                end: 1,
-            }),
-            frameRate: 2,
-            repeat: 0,
-        });
-
-        this.scene.anims.create({
             key: 'idleplayer',
             frames: this.scene.anims.generateFrameNumbers('idle', {
                 start: 0,
@@ -80,7 +70,7 @@ class Player {
     moveRightHuman(){
         this.player.setVelocityX(350);
         this.player.setFlipX(false);
-        this.player.play('walkplayer', true)
+        this.player.stop('idleplayer', true)
     }
     moveRightCat(){
         this.player.setVelocityX(600);
@@ -90,8 +80,7 @@ class Player {
     moveLeftHuman(){
         this.player.setVelocityX(-350);
         this.player.setFlipX(true);
-        this.player.play('walkplayer', true)
-
+        this.player.stop('idleplayer', true)
     }
     moveLeftCat(){
         this.player.setVelocityX(-600);
@@ -178,7 +167,6 @@ class Player {
             this.player.body.setMaxVelocityX(900);
             this.player.body.position.y = this.player.body.position.y + 60;
             this.player.chat = true;
-            CatTimer -= 50
         }
         else
         {

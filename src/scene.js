@@ -9,7 +9,6 @@ class scene extends Phaser.Scene {
 
         this.load.spritesheet('idle','assets/images/animation/Anim_Idle_sheet.png',{frameWidth: 98, frameHeight: 190});
         this.load.spritesheet('idlecat','assets/images/animation/Anim_Idle_Cat.png',{frameWidth: 110, frameHeight: 50});
-        this.load.spritesheet('walk','assets/images/animation/Anim_Walk_sheet.png',{frameWidth: 98, frameHeight: 190});
 
         this.load.image('player', 'assets/images/Bastet.png');
         this.load.image('player2', 'assets/images/BastetC.png');
@@ -111,9 +110,6 @@ class scene extends Phaser.Scene {
             this.player.player.setVelocityY(0);
             this.player.player.setX(160);
             this.player.player.setY(850);
-            if(this.player.player.chat){
-                this.player.transform();
-            }
         });
     }
 
@@ -133,13 +129,6 @@ class scene extends Phaser.Scene {
 
 
     update() {
-
-
-
-        if(keyS.isDown){
-            this.scene.stop("playGame")
-            this.scene.launch("Screen2")
-        }
 
         this.mapSwitch();
         this.player.move();
