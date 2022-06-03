@@ -11,7 +11,7 @@ class Scene2 extends Phaser.Scene {
 
     create() {
 
-        this.scene.launch("UIScene")
+
 
         //Background
         const backgroundImage = this.add.image(0, 0, 'background').setOrigin(0, 0);
@@ -105,9 +105,9 @@ class Scene2 extends Phaser.Scene {
         });
     }
 
+
     mapSwitchDroite(){
         if(this.player.player.x <= 50){
-            console.log("fdp")
             this.scene.stop("Screen2")
             this.scene.launch("playGame")
             MapSwitchDroite = true
@@ -116,7 +116,6 @@ class Scene2 extends Phaser.Scene {
 
     mapSwitchBas(){
         if(this.player.player.y >= 1080){
-            console.log("fdp")
             this.scene.stop("Screen2")
             this.scene.launch("Screen3")
             MapSwitchHaut = true

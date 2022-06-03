@@ -11,7 +11,7 @@ class Scene3 extends Phaser.Scene {
 
     create() {
 
-        this.scene.launch("UIScene")
+
 
         //Background
         const backgroundImage = this.add.image(0, 0, 'background').setOrigin(0, 0);
@@ -77,17 +77,24 @@ class Scene3 extends Phaser.Scene {
             console.log("collide")
             this.player.player.setVelocityX(0);
             this.player.player.setVelocityY(0);
-            this.player.player.setX(160);
-            this.player.player.setY(850);
+            this.player.player.setX(975);
+            this.player.player.setY(150);
         });
     }
 
 
-
+    mapSwitchFin(){
+        if(this.player.player.x >= 1850){
+            this.scene.stop("Screen3")
+            this.scene.stop("UIScene")
+            this.scene.launch("ScreenEnd")
+        }
+    }
 
 
     update() {
 
+        this.mapSwitchFin();
         this.player.move();
         this.player.timertransform();
 

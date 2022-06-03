@@ -5,8 +5,7 @@ class Player {
         this.scene=scene
         this.cameras=scene
 
-        this.player = this.scene.physics.add.sprite(110, 865, 'player');
-        this.player.setBounce(0);
+        this.player = this.scene.physics.add.sprite(115, 865, 'player');
         this.player.body.setSize(70, 180);
         this.player.body.setMaxVelocityY(700);
         this.player.body.setMaxVelocityX(1300);
@@ -17,7 +16,7 @@ class Player {
         if(MapSwitchHaut){
             this.player.setX(950);
             this.player.setY(10);
-            MapSwitchHaut = false
+            MapSwitchHaut = false;
         }
 
 
@@ -47,7 +46,6 @@ class Player {
         JumpCount++
         Timer = 0
         this.player.setVelocityY(-550);
-        this.player.stop('idleplayer', true)
 
     }
     moveRightHuman(){
@@ -57,8 +55,7 @@ class Player {
     }
     moveRightCat(){
         this.player.setVelocityX(600);
-        this.player.setFlipX(true);
-        this.player.stop('idleplayer', true)
+        this.player.setFlipX(false);
     }
     moveLeftHuman(){
         this.player.setVelocityX(-350);
@@ -68,11 +65,15 @@ class Player {
     moveLeftCat(){
         this.player.setVelocityX(-600);
         this.player.setFlipX(true);
-        this.player.stop('idleplayer', true)
     }
     stopHuman(){
         this.player.setVelocityX(0);
         this.player.play('idleplayer', true)
+
+    }
+    stopCat(){
+        this.player.setVelocityX(0);
+        this.player.stop('idleplayer', true)
     }
 
     move(){
@@ -96,7 +97,13 @@ class Player {
         }
 
         if (!keyQ.isDown || !keyD.isDown){
-            this.stopHuman()
+            if (!this.player.chat){
+                this.stopHuman()
+            }
+            else
+            {
+                this.stopCat()
+            }
         }
 
         switch (true) {
@@ -132,12 +139,10 @@ class Player {
     transform() {
         if (!this.player.chat)
         {
-            this.player.visible=false;
-            this.player.setBounce(0,0);
+            this.player.setTexture('player2');
             this.player.body.setSize(110,50);
             this.player.body.setMaxVelocityY(700);
             this.player.body.setMaxVelocityX(900);
-            this.player.setCollideWorldBounds(false);
             this.player.body.position.y = this.player.body.position.y + 60;
             this.player.chat = true;
             CatTimer - 50
@@ -150,7 +155,6 @@ class Player {
             this.player.body.setSize(70, 180);
             this.player.body.setMaxVelocityY(700);
             this.player.body.setMaxVelocityX(1300);
-            this.player.setCollideWorldBounds(false);
             this.player.body.position.y = this.player.body.position.y - 80;
             this.player.chat = !this.player.chat;
         }

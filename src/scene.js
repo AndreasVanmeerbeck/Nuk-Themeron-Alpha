@@ -10,8 +10,19 @@ class scene extends Phaser.Scene {
         this.load.spritesheet('idle','assets/images/animation/Anim_Idle_sheet.png',{frameWidth: 98, frameHeight: 190});
 
         this.load.image('player', 'assets/images/Bastet.png');
+        this.load.image('player2', 'assets/images/BastetC.png');
         this.load.image('vase', 'assets/images/vase.png');
         this.load.image('tiles', 'assets/tilesets/BLOC.png');
+
+        this.load.image('text', 'assets/images/menu/Controls_text.png');
+        this.load.image('z', 'assets/images/menu/z.png');
+        this.load.image('q', 'assets/images/menu/q.png');
+        this.load.image('d', 'assets/images/menu/d.png');
+        this.load.image('shift', 'assets/images/menu/shift.png');
+        this.load.image('espace', 'assets/images/menu/espace.png');
+        this.load.image('back', 'assets/images/menu/Bouton_back.png');
+        this.load.image('backover', 'assets/images/menu/Bouton_back_2.png');
+        this.load.image('help', 'assets/images/menu/Help.png');
 
         // Load the export Tiled JSON
         this.load.tilemapTiledJSON('map', 'assets/tilemaps/level1.json');
@@ -20,7 +31,11 @@ class scene extends Phaser.Scene {
 
     create() {
 
-        this.scene.launch("UIScene")
+        if(Gamelaunch === true){
+            this.scene.launch("UIScene")
+            Gamelaunch = false
+        }
+
 
         //Background
         const backgroundImage = this.add.image(0, 0, 'background').setOrigin(0, 0);
@@ -38,6 +53,14 @@ class scene extends Phaser.Scene {
 
         this.lamps = map.createLayer('Lamp', tileset);
         //this.blocks.setCollisionByExclusion(-1, true);
+
+        this.add.image(60,680,'help').setOrigin(0,0).setScale(0.3);
+        this.add.image(80 ,760,'espace').setOrigin(0,0).setScale(0.5);
+        this.add.image(111,700,'z').setOrigin(0,0).setScale(0.7);
+
+        this.add.image(600,120,'help').setOrigin(0,0).setScale(0.3);
+        this.add.image(647,150,'shift').setOrigin(0,0).setScale(0.7);
+
 
         //Controles
         keyQ = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.Q);
@@ -108,11 +131,9 @@ class scene extends Phaser.Scene {
 
     update() {
 
-
-
         if(keyS.isDown){
             this.scene.stop("playGame")
-            this.scene.launch("Screen2")
+            this.scene.launch("Screen3")
         }
 
 

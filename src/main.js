@@ -25,7 +25,6 @@ const config = {
         default: 'arcade',
         arcade: {
             gravity: { y: 1600 },
-            debug: true
         },
     },
     scene: [
@@ -35,6 +34,7 @@ const config = {
         Scene3,
         SceneUI,
         SceneControls,
+        SceneEnd,
     ]
 };
 
@@ -53,3 +53,5 @@ let CatTimer = 200;
 let MapSwitchDroite;
 let MapSwitchHaut;
 let BonusAmount = 0;
+let initialtime;
+let Gamelaunch = true;
