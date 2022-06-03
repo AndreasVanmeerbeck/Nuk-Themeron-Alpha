@@ -19,11 +19,27 @@ class Player {
             MapSwitchHaut = false;
         }
 
+        if(MapSwitchDroite){
+            this.player.setX(1800);
+            this.player.setY(865);
+            MapSwitchDroite = false;
+        }
 
         this.animation();
     }
 
     animation() {
+
+        this.scene.anims.create({
+            key: 'walkplayer',
+            frames: this.scene.anims.generateFrameNumbers('walk', {
+                start: 0,
+                end: 1,
+            }),
+            frameRate: 2,
+            repeat: 0,
+        });
+
         this.scene.anims.create({
             key: 'idleplayer',
             frames: this.scene.anims.generateFrameNumbers('idle', {
@@ -33,6 +49,18 @@ class Player {
             frameRate: 2,
             repeat: 0,
         });
+
+        this.scene.anims.create({
+            key: 'idleplayercat',
+            frames: this.scene.anims.generateFrameNumbers('idlecat', {
+                start: 0,
+                end: 2,
+            }),
+            frameRate: 2,
+            repeat: 0,
+        });
+
+
     }
 
     jumpHuman(){
@@ -46,35 +74,42 @@ class Player {
         JumpCount++
         Timer = 0
         this.player.setVelocityY(-550);
+        this.player.stop('idleplayercat', true)
 
     }
     moveRightHuman(){
         this.player.setVelocityX(350);
         this.player.setFlipX(false);
-        this.player.stop('idleplayer', true)
+        this.player.play('walkplayer', true)
     }
     moveRightCat(){
         this.player.setVelocityX(600);
         this.player.setFlipX(false);
+        this.player.stop('idleplayercat', true)
     }
     moveLeftHuman(){
         this.player.setVelocityX(-350);
         this.player.setFlipX(true);
-        this.player.stop('idleplayer', true)
+        this.player.play('walkplayer', true)
+
     }
     moveLeftCat(){
         this.player.setVelocityX(-600);
         this.player.setFlipX(true);
+        this.player.stop('idleplayercat', true)
     }
     stopHuman(){
         this.player.setVelocityX(0);
         this.player.play('idleplayer', true)
 
+
     }
     stopCat(){
         this.player.setVelocityX(0);
-        this.player.stop('idleplayer', true)
+        this.player.play('idleplayercat', true)
     }
+
+
 
     move(){
         if (keySHIFT.isDown){
@@ -106,29 +141,27 @@ class Player {
             }
         }
 
-        switch (true) {
-            case keyQ.isDown:
-                if (!this.player.chat){
+        if (keyQ.isDown){
+            if (!this.player.chat){
                 this.moveLeftHuman()
-                }
-                else {
+            }
+            else {
                 this.moveLeftCat()
-                }
-                break;
-            case keyD.isDown:
-                if (!this.player.chat){
-                    this.moveRightHuman()
-                }
-                else {
-                    this.moveRightCat()
-                }
-                break;
+            }
+        }
+        if (keyD.isDown){
+            if (!this.player.chat){
+                this.moveRightHuman()
+            }
+            else {
+                this.moveRightCat()
+            }
         }
 
-                if(!keySHIFT.isDown)
-                {
-                    this.flag=true
-                }
+        if(!keySHIFT.isDown)
+        {
+            this.flag=true
+        }
 
 
         if (this.player.body.onFloor()){
@@ -145,7 +178,7 @@ class Player {
             this.player.body.setMaxVelocityX(900);
             this.player.body.position.y = this.player.body.position.y + 60;
             this.player.chat = true;
-            CatTimer - 50
+            CatTimer -= 50
         }
         else
         {

@@ -79,6 +79,9 @@ class Scene3 extends Phaser.Scene {
             this.player.player.setVelocityY(0);
             this.player.player.setX(975);
             this.player.player.setY(150);
+            if(this.player.player.chat){
+                this.player.transform();
+            }
         });
     }
 

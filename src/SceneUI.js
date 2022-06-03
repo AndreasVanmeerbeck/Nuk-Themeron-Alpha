@@ -92,7 +92,6 @@ class SceneUI extends Phaser.Scene {
     {
         initialtime += 1; // One second
         this.text.setText(this.formatTime(initialtime));
-        console.log(initialtime);
     }
 
     UIUpdate(){
