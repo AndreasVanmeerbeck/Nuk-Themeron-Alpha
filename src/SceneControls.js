@@ -4,14 +4,6 @@ class SceneControls extends Phaser.Scene {
         super("ControlsScene");
     }
     preload(){
-        this.load.image('text', 'assets/images/menu/Controls_text.png');
-        this.load.image('z', 'assets/images/menu/z.png');
-        this.load.image('q', 'assets/images/menu/q.png');
-        this.load.image('d', 'assets/images/menu/d.png');
-        this.load.image('shift', 'assets/images/menu/shift.png');
-        this.load.image('espace', 'assets/images/menu/espace.png');
-        this.load.image('back', 'assets/images/menu/Bouton_back.png');
-        this.load.image('backover', 'assets/images/menu/Bouton_back_2.png');
     }
     create(){
         this.add.image(0,0,'bg').setOrigin(0,0).setScale(1);
