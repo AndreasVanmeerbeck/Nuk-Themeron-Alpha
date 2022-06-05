@@ -15,7 +15,6 @@ const config = {
             width: 720,
             height: 680
         },
-
         max: {
             width: 1280,
             height: 720,
@@ -25,6 +24,7 @@ const config = {
         default: 'arcade',
         arcade: {
             gravity: { y: 1600 },
+            fps : 140
         },
     },
     scene: [
