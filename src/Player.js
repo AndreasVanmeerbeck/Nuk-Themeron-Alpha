@@ -13,6 +13,7 @@ class Player {
         this.scene.physics.add.collider(this.player, this.scene.blocks);
         this.player.chat = false;
 
+        //Position de respawn suivant l'entrée dans le cadre
         if(MapSwitchHaut){
             this.player.setX(950);
             this.player.setY(10);
@@ -24,12 +25,12 @@ class Player {
             this.player.setY(865);
             MapSwitchDroite = false;
         }
-
+        //On appel les anims
         this.animation();
     }
 
     animation() {
-
+        //On créer les anims
         this.scene.anims.create({
             key: 'idleplayer',
             frames: this.scene.anims.generateFrameNumbers('idle', {
@@ -52,7 +53,7 @@ class Player {
 
 
     }
-
+    //Gère les déplacements et joue les anims
     jumpHuman(){
         JumpCount++
         Timer = 0
@@ -99,7 +100,7 @@ class Player {
     }
 
 
-
+    //On détecte les inputs pour move
     move(){
         if (keySHIFT.isDown){
             if (!this.flag) {
@@ -157,7 +158,7 @@ class Player {
             JumpCount = 0;
         }
     }
-
+    //Transformation du joueur en chat
     transform() {
         if (!this.player.chat)
         {
@@ -165,6 +166,7 @@ class Player {
             this.player.body.setSize(110,50);
             this.player.body.setMaxVelocityY(700);
             this.player.body.setMaxVelocityX(900);
+            //offset pour ne pas passer à travers le sol
             this.player.body.position.y = this.player.body.position.y + 60;
             this.player.chat = true;
         }
@@ -176,12 +178,13 @@ class Player {
             this.player.body.setSize(70, 180);
             this.player.body.setMaxVelocityY(700);
             this.player.body.setMaxVelocityX(1300);
+            //offset pour ne pas passer à travers le sol
             this.player.body.position.y = this.player.body.position.y - 80;
             this.player.chat = !this.player.chat;
         }
 
     }
-
+    //changement de forme quand le mana tombe à 0
     timertransform(){
         if (!this.player.chat && CatTimer<=200){
           CatTimer++

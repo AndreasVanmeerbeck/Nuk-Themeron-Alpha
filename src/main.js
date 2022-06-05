@@ -6,11 +6,6 @@ const config = {
     scale: {
         mode: Phaser.Scale.RESIZE,
         autoCenter: Phaser.Scale.CENTER_BOTH,
-        fps:{
-            min:120,
-            target:140,
-            forceSetTimeOut:true,
-        },
         min: {
             width: 720,
             height: 680
@@ -39,7 +34,7 @@ const config = {
 };
 
 const game = new Phaser.Game(config);
-
+//Variables
 let keyQ;
 let keyS;
 let keyD;

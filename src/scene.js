@@ -32,6 +32,7 @@ class scene extends Phaser.Scene {
 
     create() {
 
+        //Lancement de l'UI que à la première fois lancé
         if(Gamelaunch === true){
             this.scene.launch("UIScene")
             Gamelaunch = false
@@ -44,6 +45,7 @@ class scene extends Phaser.Scene {
 
         const vases = this.add.image(1400, 255, 'vase').setOrigin(0, 0);
 
+        //map tiled
         const map = this.make.tilemap({key: 'map'});
 
         const tileset = map.addTilesetImage('main_tileset', 'tiles');
@@ -53,8 +55,8 @@ class scene extends Phaser.Scene {
         this.spikes = map.createLayer('Spike', tileset);
 
         this.lamps = map.createLayer('Lamp', tileset);
-        //this.blocks.setCollisionByExclusion(-1, true);
 
+        //Tuto
         this.add.image(60,680,'help').setOrigin(0,0).setScale(0.3);
         this.add.image(80 ,760,'espace').setOrigin(0,0).setScale(0.5);
         this.add.image(111,700,'z').setOrigin(0,0).setScale(0.7);
@@ -79,6 +81,7 @@ class scene extends Phaser.Scene {
 
         this.player = new Player(this)
 
+        //Colliders
         this.collide = this.physics.add.group({
             allowGravity: false,
             immovable: true,
@@ -99,11 +102,11 @@ class scene extends Phaser.Scene {
         });
         this.spikeCollider()
 
-
+        //Setup Cam
         this.cameras.main.setBounds(45, -2, 15000, 15000)
         this.cameras.main.zoom = 0.7
     }
-
+    //event de collision
     spikeCollider(){
         this.physics.add.collider(this.spikescollide, this.player.player, (player) => {
             this.player.player.setVelocityX(0);

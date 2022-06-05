@@ -17,6 +17,8 @@ class Scene3 extends Phaser.Scene {
         const backgroundImage = this.add.image(0, 0, 'background').setOrigin(0, 0);
         backgroundImage.setScale(1, 1);
 
+
+        //map tiled
         const map = this.make.tilemap({key: 'map'});
 
         const tileset = map.addTilesetImage('main_tileset', 'tiles');
@@ -41,6 +43,8 @@ class Scene3 extends Phaser.Scene {
 
         this.player = new Player(this)
 
+
+        //collider
         this.collide = this.physics.add.group({
             allowGravity: false,
             immovable: true,
@@ -62,6 +66,8 @@ class Scene3 extends Phaser.Scene {
 
         this.spikeCollider()
 
+
+        //caméra
         this.cameras.main.setBounds(45, -2, 15000, 15000)
         this.cameras.main.zoom = 0.7
     }

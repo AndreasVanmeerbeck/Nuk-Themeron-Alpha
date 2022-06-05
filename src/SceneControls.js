@@ -15,6 +15,7 @@ class SceneControls extends Phaser.Scene {
         this.load.image('help', 'assets/images/menu/Help.png');
     }
     create(){
+        //Affichage controles
         this.add.image(0,0,'bg').setOrigin(0,0).setScale(1);
         this.add.image(-20,0,'text').setOrigin(0,0).setScale(1);
         this.add.image(1020,300,'z').setOrigin(0,0).setScale(1);
@@ -24,6 +25,8 @@ class SceneControls extends Phaser.Scene {
         this.add.image(945,370,'espace').setOrigin(0,0).setScale(1);
         this.add.image(550,250,'icon').setOrigin(0,0).setScale(1);
 
+
+        //bouton de retour en arrière
         let backbutton = this.add.image(90,70,'back');
         backbutton.setScale(1);
 

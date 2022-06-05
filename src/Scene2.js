@@ -17,6 +17,7 @@ class Scene2 extends Phaser.Scene {
         const backgroundImage = this.add.image(0, 0, 'background').setOrigin(0, 0);
         backgroundImage.setScale(1, 1);
 
+        //map tiled
         const map = this.make.tilemap({key: 'map'});
 
         const tileset = map.addTilesetImage('main_tileset', 'tiles');
@@ -24,7 +25,6 @@ class Scene2 extends Phaser.Scene {
         this.blocks = map.createLayer('Ground2', tileset);
 
         this.spikes = map.createLayer('Spike2', tileset);
-        //this.blocks.setCollisionByExclusion(-1, true);
 
         //Controles
         keyQ = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.Q);
@@ -42,6 +42,7 @@ class Scene2 extends Phaser.Scene {
 
         this.player = new Player(this)
 
+        //collider
         this.collide = this.physics.add.group({
             allowGravity: false,
             immovable: true,
@@ -63,6 +64,7 @@ class Scene2 extends Phaser.Scene {
 
         this.spikeCollider()
 
+        //Gestion bonus
         this.Bbonus = this.physics.add.group({
             allowGravity: false,
             immovable: true
@@ -79,12 +81,7 @@ class Scene2 extends Phaser.Scene {
 
         this.physics.add.overlap(this.Bbonus, this.player.player, this.BonusTake, null, this)
 
-
-
-
-
-
-
+        //Caméra
         this.cameras.main.setBounds(45, -2, 15000, 15000)
         this.cameras.main.zoom = 0.7
     }
@@ -108,7 +105,7 @@ class Scene2 extends Phaser.Scene {
         });
     }
 
-
+    //Position de respawn suivant l'entrée dans le cadre
     mapSwitchDroite(){
         if(this.player.player.x <= 50){
             this.scene.stop("Screen2")
